@@ -46,9 +46,7 @@ Weitere Untersuchungspunkte ergeben sich basierend auf den ermittelten Ergebniss
 
 #### 3.4 Model-Erstellung
 
-
-
-
+Basierend auf den Ergebnissen der Explorationsphase soll ein Modell zur Entwicklung des grenzüberschreitenden Gütertransports entwickelt werden, das die Auswirkung verschiedener Einflussfaktoren darstellt. Zu diesem Zweck werden verschiedene Hypothesen geprüft und anschließend angenommen oder verworfen. Ein besonderes Augenmerk liegt hierbei auf der Beurteilung der Passfähigkeit des Modells im Kontext des Problems. Hierbei wird auch die Möglichkeit berücksichtigt, dass sich aus den vorhandenen Daten kein passendes Modell generieren lässt. In diesem Fall muss abschließend analysiert werden, welche Gründe dies haben könnte. 
 
 ## 4 Untersuchungsdurchführung und Ergebnisse
 
@@ -97,6 +95,58 @@ Abschließend erfolgt die Portierung in den Arbeitsbereich. Dies bedeutete in un
 
 Zu Beginn der Exploration muss festgelegt werden, wonach der Umfang der Transporte bemessen wird. Hier kommen nur zwei Einheiten infrage: Die absolute Anzahl der grenzüberschreitenden Transporte oder der monetäre Wert in US-Dollar. Alle folgenden Berechnungen nutzen den monetären Wert als Vergleichsmaß. 
 
+Als Ausgangspunkt für die Exploration eignet sich ein grober Überblick über den jährlichen Umfang der Gütertransporte. Die folgenden Diagramme spiegeln die Entwicklung zwischen 2013 und 2018 wieder.
+
+*Diagramme gesamt*
+
+Diese Werte lassen sich nochmals verfeinern, indem Export und Import getrennt von einander betrachtet werden:
+
+###### Mexico
+
+![ExportMX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\ExportMX.png)
+
+![ImportMX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\ImportMX.png)
+
+###### Canada 
+
+![ExportCA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\ExportCA.png)
+
+![ImportCA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\ImportCA.png)
+
+Beim Vergleich der Mittelwerte erkennt man hier bereits, dass der Güterhandel mit Canada deutlich ausgeprägter ist als der mit Mexiko.
+
+*Screenshot Mittelwerte*
+
+Aufgrund der flächenmäßigen Größe der USA und den damit einhergehenden Unterschieden zwischen verschiedenen Regionen bezüglich politischer Einstellung, Bevölkerungsdichte und geographischen Gegebenheiten, bietet es sich an, in einem nächsten Schritt die Verteilung dieser Handelsmengen auf die einzelnen Staaten zu untersuchen. 
+
+Allein bei der Betrachtung des Jahres 2018 wird hier deutlich, dass es bedeutende Diskrepanzen zwischen dem Handelsvolumen der einzelnen Staaten gibt und dass sich diese Verteilung auch bei Transporten nach und von Mexico und nach und von Canada unterscheiden. 
+
+###### Mexico
+
+
+
+###### Canada
+
+
+
+Es fällt auf, dass der Jahresumsatz von Waren, die die amerikanische Grenze überqueren, in den Staaten besonders hoch ist, die dem Handelspartner geographisch besonders nahe liegen. Daher empfiehlt sich die Untersuchung der Transportmittel, die für die Transporte zum Einsatz kommen. 
+
+Im Jahr 2018 gestaltete diese sich wie folgt:
+
+![DisagmotMX2018](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\DisagmotMX2018.png)
+
+![DisagmitCA2018](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\DisagmitCA2018.png)
+
+Das meist genutzte Transportmittel ist unverkenntlich der Truck. Ein Vergleich der jährlichen Trucktransporte im Beobachtungszeitraum zeigt auf, dass der Einsatz dieser Lastenträger tendenziell steigend ist.
+
+![TruckMX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\TruckMX.png)
+
+![TruckCA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\TruckCA.png)
+
+Daraus leitet sich die Frage ab, ob sich das auch bezogen auf einzelne, handelsstarke US-Staaten so verhält. Betrachten wir also Mexikos stärksten Ex- und Importeur Texas.
+
+![DisagmotExTX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\DisagmotExTX.png)
+
 
 
 #### 4.4 Model-Erstellung
@@ -115,5 +165,5 @@ Zu Beginn der Exploration muss festgelegt werden, wonach der Umfang der Transpor
 
 ### Anhang
 
-
+- TotalImportExportValuesByCountry
 
