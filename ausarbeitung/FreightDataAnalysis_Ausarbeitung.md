@@ -10,6 +10,12 @@ Das Hauptaugenmerk liegt hierbei auf Gütertransporten zwischen den USA und Mexi
 
 ## 2 Grundlagen
 
+Am 8. November 2016 fand in den Vereinigten Staaten die 58. Präsidentschaftswahl statt. Mit 306 von 538 stimmen der Wahlmänner gewann der Republikaner Donald Trump gegen die demokratische Kandidatin Hilary Clinton (Quelle: https://www.bbc.com/news/election/us2016/results, letzter Aufruf: 24.06.2019, 14:57) Etwa zwei Monate später, am 20. Januar 2017 wurde er offiziell als 45. Präsident der Vereinigten Staaten vereidigt.
+
+Bereits während des Wahlkampfes sorgte der Milliardär mit seiner "America First"-Politik für Aufsehen. Eines seiner kontroversten Wahlversprechen war es, entlang der Grenze zwischen den USA und Mexiko eine Mauer zu bauen. Die Kosten für dieses Vorhaben sollte die mexikanische Regierung tragen. (*Quelle*?)
+
+Doch nicht nur im Bezug auf Mexiko stellt Trump die Beziehung zu den Nachbarländern in Frage. Auch die seit 1994 bestehende Freihandelsorganisation NAFTA, die Northamerican Foreign Trade Zone (Quelle: http://www.wirtschaftslexikon24.com/d/nafta/nafta.html, letzter Aufruf) kritisierte er stark. Das Abkommen schweißte die USA, Kanada und Mexiko zum größten Wirtschaftsraum der Welt zusammen. Unter Trumps Führung wurde NAFTA neu verhandelt und so unterzeichneten die drei Staaten am 30. November 2018 das United States-Mexico-Canada Agreement. (Quelle: https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement, letzter Aufruf: 24.06.2019)
+
 ## 3 Methodologie und Untersuchungsplanung
 
 #### 3.1 Datenbeschaffung
@@ -148,6 +154,26 @@ Daraus leitet sich die Frage ab, ob sich das auch bezogen auf einzelne, handelss
 ![DisagmotExTX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\DisagmotExTX.png)
 
 
+
+![DisagmotImTX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\DisagmotImTX.png)
+
+In beide Richtungen werden Waren hauptsächlich per Truck transportiert. Ein ähnliches Bild zeichnet sich ab, wenn man sich den Warenfluss zwischen Michigan und Canada anschaut:
+
+![DisagmotExMI](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\DisagmotExMI.png)
+
+![DisagmotExMI](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\DisagmotImMI.png)
+
+Es lohnt sich also, einen Blick auf die Karte der Vereinigten Staaten zu werfen:
+
+*Heatmap + Legende*
+
+Texas und Michigan stechen aufgrund der hohen Transportraten hervor. Doch noch ein weiterer Aspekt fällt auf: beide US-Staaten grenzen an das Nachbarland an, mit dem aktiv Handel betrieben wird. Basierend auf diesen Ergebnissen lässt sich die Hypothese aufstellen, dass das Handelsvolumen der einzelnen Staaten von der geographischen Nähe zum Handelspartner abhängt. Diese Hypothese soll im späteren Verlauf der Arbeit noch überprüft werden. 
+
+Trumps Politik stellt mit seiner "America First"-Philosophie die Belange des Landes an die erste Stelle, insbesondere in wirtschaftlicher Hinsicht. Er setzt auf wirtschaftspolitischen Nationalismus. Es ist daher naheliegend anzunehmen, dass ein Interesse besteht, den Import von Waren zu reduzieren und somit den Geldfluss in Nachbarsländer zu minimieren. Insbesondere in Staaten, deren Stimmen in der Wahl 2016 an den republikanischen Kandidaten gingen, sollte daher eine Abnahme des Imports aus Mexico und Canada zu erkennen sein. Betrachtet man beispielsweise den Import aus Mexiko des vorwiegend republikanische Louisianas (Quelle: https://www.nytimes.com/elections/2016/results/president, letzter Zugriff: 24.06.2019, 24.06.2019) über die letzten 10 Jahre, so lässt sich eine solche Tendenz erkennen:
+
+![ImportLA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\ImportLA.png)
+
+Daraus ergibt sich eine weitere Hypothese, um die Entwicklung der Handelsbeziehungen seit Trumps Amtseintritt zu beschreiben: In Staaten, deren Stimmen an Präsidentschaftskandidat Donald Trump gingen, reduzierte sich nach der Wahl 2016 der Import.
 
 #### 4.4 Model-Erstellung
 
