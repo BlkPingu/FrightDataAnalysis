@@ -103,7 +103,9 @@ Zu Beginn der Exploration muss festgelegt werden, wonach der Umfang der Transpor
 
 Als Ausgangspunkt für die Exploration eignet sich ein grober Überblick über den jährlichen Umfang der Gütertransporte. Die folgenden Diagramme spiegeln die Entwicklung zwischen 2013 und 2018 wieder.
 
-*Diagramme gesamt*
+![TotalMX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\TotalMX.png)
+
+![TotalCA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\TotalCA.png)
 
 Diese Werte lassen sich nochmals verfeinern, indem Export und Import getrennt von einander betrachtet werden:
 
@@ -121,7 +123,13 @@ Diese Werte lassen sich nochmals verfeinern, indem Export und Import getrennt vo
 
 Beim Vergleich der Mittelwerte erkennt man hier bereits, dass der Güterhandel mit Canada deutlich ausgeprägter ist als der mit Mexiko.
 
-*Screenshot Mittelwerte*
+###### Mexiko
+
+![meanMX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\meanMX.png)
+
+###### Canada
+
+![1561468328344](C:\Users\henni\AppData\Roaming\Typora\typora-user-images\1561468328344.png)
 
 Aufgrund der flächenmäßigen Größe der USA und den damit einhergehenden Unterschieden zwischen verschiedenen Regionen bezüglich politischer Einstellung, Bevölkerungsdichte und geographischen Gegebenheiten, bietet es sich an, in einem nächsten Schritt die Verteilung dieser Handelsmengen auf die einzelnen Staaten zu untersuchen. 
 
@@ -129,11 +137,15 @@ Allein bei der Betrachtung des Jahres 2018 wird hier deutlich, dass es bedeutend
 
 ###### Mexico
 
+![StatesExport2018MX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\StatesExport2018MX.png)
 
+![StatesImport2018MX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\StatesImport2018MX.png)
 
 ###### Canada
 
+![StatesExport2018CA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\StatesExport2018CA.png)
 
+![StatesImport2018CA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\StatesImport2018CA.png)
 
 Es fällt auf, dass der Jahresumsatz von Waren, die die amerikanische Grenze überqueren, in den Staaten besonders hoch ist, die dem Handelspartner geographisch besonders nahe liegen. Daher empfiehlt sich die Untersuchung der Transportmittel, die für die Transporte zum Einsatz kommen. 
 
@@ -177,19 +189,249 @@ Daraus ergibt sich eine weitere Hypothese, um die Entwicklung der Handelsbeziehu
 
 #### 4.4 Model-Erstellung
 
+Welche politische Einstellung in den einzelnen Staaten vorherrschend ist, lässt sich anhand der Stimmenverteilung in der Präsidentschaftswahl 2016 beurteilen:
 
+![wahlergebnis2016](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\wahlergebnis2016.jpg)
+
+
+
+*Bildquelle?*
+
+Nun gilt es zu prüfen, ob in diesen Staaten der Güterhandel seit 2016 zurückgegangen ist. Da eine Reduktion des Exports auch eine Senkung von Einnahmequellen für die einzelnen Staaten bedeuten würde und dies nicht der "America First"-Philosophie entspricht, konzentriert sich die Untersuchung auf den Import aus Mexiko und Canada. 
+
+##### Importvolumen in republikanischen Staaten
+
+###### H0: In Staaten, die in der Präsidentschaftswahl 2016 für Donald Trump gestimmt haben, reduzierte sich der Import nach Amtsantritt nicht. 
+
+###### H1: In Staaten, die in der Präsidentschaftswahl 2016 für Donald Trump gestimmt haben, reduzierte sich der Import nach Amtsantritt 
+
+*Hypothesentest Moritz*
+
+Die Alternativhypothese, dass sich in Trump-affinen Staaten nach der Wahl 2016 der Import reduzierte, muss abgelehnt werden. Ein Modell, dass die Verbindung zwischen der politischen Einstellung eines Staates und seinen Handelsaktivitäten mit den Nachbarländern beschreibt, kann nicht erstellt werden. 
+
+Es ist also notwendig, noch andere Faktoren zu berücksichtigen. Die Ergebnisse der Explorationsphase deuten auf einen Zusammenhang zwischen der Entfernung eines US-Staates zum Handelspartner und den transportierten Waren hin. Bei der Überprüfung dieser Hypothese müssen die Handelsbeziehungen mit Mexiko und Canada einzeln betrachtet werden. Es müssen also zwei Hypothesentests durchgeführt werden.
+
+##### Warentransporte zwischen den USA und Mexiko
+
+Gearbeitet wird mit folgenden Hypothesen:
+
+###### H0: Das Handelsvolumen der einzelnen US-Staaten hängt nicht von der Nähe zu Mexiko ab. 
+
+###### H1: Das Handelsvolumen der einzelnen US-Staaten hängt von der Nähe zu Mexiko ab.
+
+Um diese Hypothese überprüfen zu können, muss zunächst definiert werden, welche Staaten "nah" an Mexiko liegen. Dazu werden sie manuell in drei Gruppen eingeteilt: 
+
+| Entfernungs-Gruppe                    | Anzahl Staaten |
+| ------------------------------------- | -------------- |
+| 1: keine/geringe Entfernung zu Mexiko | 5              |
+| 2: mittlere Entfernung zu Mexiko      | 14             |
+| 3: große Entfernung zu Mexiko         | 33             |
+
+Basierend auf den Größenordnungen dieser Gruppen, müssen die Staaten nun nach ihrem jährlichen Umsatz an grenzüberschreitenden Transporten gruppiert werden. Genutzt wird dafür jeweils das arithmetische Mittel des Jahreswertes in US-Dollar über den Beobachtungszeitraum von 2013 bis 2018. Dabei entsteht folgende Verteilung:
+
+| Wert-Gruppe                                        | Anzahl Staaten |
+| -------------------------------------------------- | -------------- |
+| 1: hoher jährlicher Transportwert in US-Dollar     | 5              |
+| 2: mittlerer jährlicher Transportwert in US-Dollar | 14             |
+| 3: niedriger jährlicher Transportwert in US-Dollar | 33             |
+
+Die Entfernungs-Gruppen müssen getrennt voneinander gegen die entsprechende Wert-Gruppe getestet werden. Da die beiden Stichproben aus der selben Grundgesamtheit stammen, kann angenommen werden, dass sie die selben Varianzen haben. 
+
+###### Test 1: geringe Entfernung zu Mexiko und großer Transportwert
+
+```
+# |T| ermitteln
+t.test(dis1[,1], val1[,1], var.equal = TRUE)
+```
+
+![t.test1](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\t.test1.png)
+
+```
+# T* ermitteln
+qt(p = 0.05/2, df = 8, lower.tail = FALSE)
+```
+
+**Ergebnis:**
+
+|T| = -0.2933
+
+T* = 2.30600413520417
+
+|T| < T* Nullhypothese annehmen, Alternativhypothese ablehnen
+
+
+
+###### Test 2: mittlere Entfernung zu Mexiko und mittlerer Transportwert
+
+```
+# |T| ermitteln
+t.test(dis2[,1], val2[,1], var.equal = TRUE)
+```
+
+![t.test2](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\t.test2.png)
+
+```
+# T* ermitteln
+qt(p = 0.05/2, df = 26, lower.tail = FALSE)
+```
+
+**Ergebnis**
+
+|T| = -3.2433
+
+T* = 2.05552943864287
+
+|T| < T* Nullhypothese annehmen, Alternativhypothese verwerfen
+
+
+
+###### Test 3: große Entfernung zu Mexiko und niedriger Transportwert
+
+```
+# |T| ermitteln
+t.test(dis3[,1], val3[,1], var.equal = TRUE)
+```
+
+![t.test3](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\t.test3.png)
+
+```
+# T* ermitteln
+qt(p = 0.05, df = 64, lower.tail = FALSE)
+```
+
+**Ergebnis** 
+
+|T| = 1.9244
+
+T* = 1.66901302502409
+
+|T| > T* Nullhypothese verwerfen, Alternativhypothese annehmen
+
+
+
+Selbst unter Berücksichtigung eines möglichen Fehlers muss bei zwei von drei Tests die Alternativhypothese abgelehnt werden. Die Analyse der jährlichen Transporte von und nach Mexiko weist also nicht daraufhin, dass die Entfernung zum Handelspartner das entscheidende Kriterium für den Umfang der grenzüberschreitenden Warentransporte ist. Es gilt also nun zu überpüfen, wie sich dies in Bezug auf Canada verhält.
+
+###### Warentransporte zwischen den USA und Canada
+
+Analog zur Analyse der Handelsbeziehung mit Mexiko lauten die Hypothesen für Canda wie folgt:
+
+###### H0: Das Handelsvolumen der einzelnen US-Staaten hängt nicht von der Nähe zu Canada ab. 
+
+###### H1: Das Handelsvolumen der einzelnen US-Staaten hängt von der Nähe zu Canada ab.
+
+Wieder müssen die Daten zuerst nach den Kriterien "Entfernung zu Canada" und "jährlicher Transportwert in US-Dollar" gruppiert werden.
+
+| Entfernungs-Gruppe                    | Anzahl Staaten |
+| ------------------------------------- | -------------- |
+| 1: keine/geringe Entfernung zu Canada | 16             |
+| 2: mittlere Entfernung zu Canada      | 23             |
+| 3: große Entfernung zu Canada         | 13             |
+
+| Wert-Gruppe                                        | Anzahl Staaten |
+| -------------------------------------------------- | -------------- |
+| 1: hoher jährlicher Transportwert in US-Dollar     | 16             |
+| 2: mittlerer jährlicher Transportwert in US-Dollar | 23             |
+| 3: niedriger jährlicher Transportwert in US-Dollar | 13             |
+
+Auch hier müssen wieder drei separate Tests durchgeführt werden.
+
+###### Test 1: geringe Entfernung zu Mexiko und großer Transportwert
+
+```
+# |T| ermitteln
+t.test(dis1[,1], val1[,1], var.equal = TRUE)
+```
+
+![t.test1CA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\t.test1CA.png)
+
+```
+# T* ermitteln
+qt(p = 0.05/2, df = 30, lower.tail = FALSE)
+```
+
+**Ergebnis:**
+
+|T| = -1.1191
+
+T* = 2.04227245630124
+
+|T| < T* Nullhypothese annehmen, Alternativhypothese verwerfen
+
+
+
+###### Test 2: mittlere Entfernung zu Mexiko und mittlerer Transportwert
+
+```
+# |T| ermitteln
+t.test(dis2[,1], val2[,1], var.equal = TRUE)
+```
+
+![t.test2CA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\t.test2CA.png)
+
+```
+# T* ermitteln
+qt(p = 0.05/2, df = 44, lower.tail = FALSE)
+```
+
+**Ergebnis**
+
+|T| = 0.16644
+
+T* = 2.01536757444376
+
+|T| < T* Nullhypothese annehmen, Alternativhypothese verwerfen
+
+
+
+###### Test 3: große Entfernung zu Mexiko und niedriger Transportwert
+
+```
+# |T| ermitteln
+t.test(dis3[,1], val3[,1], var.equal = TRUE)
+```
+
+![t.test3CA](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\t.test3CA.png)
+
+```
+# T* ermitteln
+qt(p = 0.05, df = 24, lower.tail = FALSE)
+```
+
+**Ergebnis** 
+
+|T| = 2.146
+
+T* = 1.71088207990943
+
+|T| > T* Nullhypothese verwerfen, Alternativhypothese annehmen
+
+Das Ergebnis der Analyse des Gütertransports zwischen den einzelnen US-Staaten und Canada gleicht dem mit Mexiko: Nur in der letzten Gruppe lässt sich ein eindeutiger Zusammenhang erkennen. Es kann also nicht pauschalisiert werden, dass die Entfernung zum Handelspartner im direkten Zusammenhang zum wertmäßigen Umfang des Güterhandels steht. Es kann jedoch statiert werden, dass die Wahrscheinlichkeit, dass ein US-Staat umfassende grenzüberschreitende Warentransporte in ein Nachbarland verzeichnet, mit zunehmender geographischer Distanz zur Grenze sinkt. 
+
+Um ein passendes Modell im Kontext der Trump-Administration zu erstellen, reicht diese Aussage jedoch nicht.
 
 ## 5 Zusammenfassung
 
+Ausgangspunkt für die Analyse der Daten zu Warentransporten über die US-amerikanischen Grenzen war die "America First"-Politik des aktuellen US-Präsidenten Donald Trump. Das Vorhaben, die amerikanisch-mexikanische Grenze durch eine Mauer zu sichern, sowie die Überarbeitung NAFTAs, ließen einen Rückgang des Güterflusses erwarten. Bereits zu Beginn der Explorationsphase jedoch wurde ersichtlich, dass eine bloße Auswertung des jährlichen Gesamtumsatzes diesbezüglich zu keinem eindeutigen Ergebnis führen würde. Die explorativ-hypothesensuchende Vorgehensweise war daher von Vorteil.
 
+Entscheidend für den Verlauf der Analyse war die Meinungsverschiedenheit, die innerhalb der amerikanischen Bevölkerung bezüglich der Politik Trumps vorherrscht. Die Stimmenverteilung der Präsidentschaftswahl im Jahr 2016 ermöglichte eine Untersuchung einzelner Staaten. Dabei konnte zwar für den Beobachtungszeitraum keine politisch beeinflusste Auswirkung auf Handelstätigkeiten identifiziert werden, jedoch weitete sich das Verständnis für das Zusammenspiel verschiedener Faktoren, die den Umfang der Warentransporte bestimmen. So konnte herausgestellt werden, dass ein Zusammenhang zwischen der geographischen Distanz zum Handelspartner und den gegenseitigen Warenlieferungen besteht. Dennoch wurde außerdem deutlich, dass diese Verbindung kritisch zu beurteilen ist. Für die Erstellung eines zuverlässigen Models waren die Ergebnisse nicht hinreichend.
 
 ## 6 Diskussion
 
+Zusammenfassend lässt sich sagen, dass Trumps aggressive Haltung gegenüber Mexiko in wirtschaftlicher Hinsicht keine Auswirkungen zu haben scheint. Nun muss allerdings berücksichtigt werden, dass nur Messwerte zu den ersten zwei Jahren seiner Amtszeit als US-amerikanischer Präsident vorliegen. Die Unterzeichnung des neu verhandelten United States-Mexico-Canada Agreement fand erst am Ende des Beobachtungszeitraumes statt, sodass von den vorhandenen Daten nicht auf die zukünftige Entwicklung geschlossen werden kann. 
 
+In dieser Hinsicht wäre es vorteilhafter gewesen, den Güterhandel unabhängig von Trumps Politik zu betrachten. Der zugrundeliegende Datensatz liefert weitaus mehr Informationen, als in der Analyse berücksichtigt wurden. 
+
+So hätte die geographische Analyse der einzelnen Staaten viel weiter ausgebaut werden können. Neben der Distanz zum Handelspartner spielen auch Faktoren wie Fläche, Bevölkerungszahl und Infrastruktur eine Rolle. Ein solcher Ansatz hätte möglicherweise Untersuchungsbefunde generiert, die auch extern valide sind. 
+
+Sofern die zugrundeliegenden Rohdaten nicht erweitert werden erfordern weiterführende Untersuchungen also eine Überarbeitung der Problemformulierung und eine Neueinbettung in einen passenderen Kontext.
 
 ### Quellen
 
 ### Anhang
 
 - TotalImportExportValuesByCountry
+- GeographicAnalysis-MX
+- GeographicAnalysis-CA
+- Code für Heatmaps mit Name und Matrikelnummer von Tobias
+- Trump-Staaten-Analyse mit Name und Matrikelnummer von Moritz
 
