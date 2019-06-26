@@ -205,6 +205,11 @@ Nun gilt es zu prüfen, ob in diesen Staaten der Güterhandel seit 2016 zurückg
 
 ###### H1: In Staaten, die in der Präsidentschaftswahl 2016 für Donald Trump gestimmt haben, reduzierte sich nach Amtsantritt der Import aus Mexiko
 
+
+
+----------
+MORITZ AB HIER
+
 Da Trump im Januar 2017 ins Amt gehoben wurde, muss hier das Importvolumen aus dem Jahr 2016 gegen das Importvolumen des Jahres 2017 abgewogen werden. Damit ergibt sich folgendes Hypothesenpaar:
 
 **H0: µ17 >= µ16**
@@ -345,6 +350,10 @@ Vergleich der reinen Werte: False
 Mit der Ausnahme von Tennessee wird bei allen Staaten die Nullhypothese angenommen. Der Import ist in den republikanisch gesonnen Staaten also nicht nur konstant geblieben, er ist sogar gestiegen. Dies wird auch deutlich, wenn man sich die Entwicklung des monatlichen Importvolumens von Texas über die zwei Jahre anschaut: 
 
 ![MonthsTX](C:\Users\henni\Documents\HTW - Angewandte Informatik\Viertes Semester\Grundlagen_Data_Science\FreightDataAnalysis\ausarbeitung\bilder\MonthsTX.png)
+
+
+MORITZ BIS HIER
+----------
 
 Die Alternativhypothese, dass sich in Trump-affinen Staaten nach der Wahl 2016 der Import reduzierte, muss abgelehnt werden. Ein Modell, dass die Verbindung zwischen der politischen Einstellung eines Staates und seinen Handelsaktivitäten mit den Nachbarländern beschreibt, kann nicht erstellt werden. 
 
