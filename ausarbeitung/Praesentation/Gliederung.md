@@ -1,13 +1,11 @@
 # Gliederung
 
-
-
-Einführung in die Thematik
-
 Was wollen wir 
 
 - Wonach suchen wir
 - Welche Hypothesen
+
+
 
 Was finden wir
 
@@ -22,6 +20,8 @@ Wie verwenden wir
 Welche Ergebnisse
 
 - Hypothesentests
+
+Wie geht's weiter
 
 
 
